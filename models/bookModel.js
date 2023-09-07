@@ -57,9 +57,9 @@ class Book {
         const { name, isbn, author_id } = bookData;
         const query = 'UPDATE books SET name = ?, isbn = ?, author_id = ? WHERE id = ?';
 
-        db.query(query, [name, isbn, author_id, bookId], (err) => {
+        db.query(query, [name, isbn, author_id, bookId], (err,results) => {
             if (err) throw err;
-            callback();
+            callback(results);
         });
     }
 

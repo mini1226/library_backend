@@ -29,7 +29,13 @@ class AuthorController {
         const authorData = req.body;
 
         Author.createAuthor(authorData, (authorId) => {
-            res.status(201).json({ id: authorId });
+            if (authorId) {
+                // Author was successfully created
+                res.status(201).json({ message: 'Author created successfully', id: authorId });
+            } else {
+                // Failed to create author (e.g., due to validation errors or database issues)
+                res.status(400).json({ error: 'Failed to create author' });
+            }
         });
     }
 
@@ -38,10 +44,18 @@ class AuthorController {
         const authorId = req.params.id;
         const authorData = req.body;
 
-        Author.updateAuthor(authorId, authorData, () => {
-            res.status(204).send(); // Successful update, no content to return
+        Author.updateAuthor(authorId, authorData, (updatedAuthor) => {
+            if (updatedAuthor) {
+                // Author was successfully updated
+                res.status(201).json({ message: 'Author updated successfully', id: authorId });
+            } else {
+                // Failed to create author (e.g., due to validation errors or database issues)
+                res.status(400).json({ error: 'Failed to update author' });
+            }
         });
     }
+
+
 }
 
 module.exports = AuthorController;

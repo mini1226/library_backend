@@ -40,7 +40,13 @@ class BookController {
         const bookData = req.body;
 
         Book.createBook(bookData, (bookId) => {
-            res.status(201).json({ id: bookId });
+            if (bookId) {
+                // Author was successfully created
+                    res.status(201).json({ message: 'Book created successfully', id: bookId });
+            } else {
+                // Failed to create author (e.g., due to validation errors or database issues)
+                res.status(400).json({ error: 'Failed to create book' });
+            }
         });
     }
 
@@ -50,8 +56,14 @@ class BookController {
         const bookId = req.params.id;
         const bookData = req.body;
 
-        Book.updateBook(bookId, bookData, () => {
-            res.status(204).send(); // Successful update, no content to return
+        Book.updateBook(bookId, bookData, (updatedBook) => {
+            if (updatedBook) {
+                // Book was successfully updated
+                res.status(201).json({ message: 'Book updated successfully', id: bookId });
+            } else {
+                // Failed to create book (e.g., due to validation errors or database issues)
+                res.status(400).json({ error: 'Failed to update book' });
+            }
         });
     }
 
