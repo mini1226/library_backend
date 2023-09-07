@@ -21,6 +21,19 @@ class BookController {
     }
 
 
+    static getBookById(req, res) {
+        const bookId = req.params.id;
+
+        Book.getBookById(bookId, (book) => {
+            if (!book) {
+                // Book not found
+                return res.status(404).json({ error: 'Book not found' });
+            }
+
+            res.json(book);
+        });
+    }
+
 
 
 

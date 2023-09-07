@@ -6,6 +6,8 @@ const BookController = require('../controllers/bookController');
 // Define book routes
 router.get('/', BookController.getAllBooks);
 router.get('/paginated', BookController.getAllBooksPaginate);
+router.get('/:id', BookController.getBookById);
+
 
 
 

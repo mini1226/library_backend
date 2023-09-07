@@ -23,6 +23,25 @@ class Book {
     }
 
 
+    static getBookById(bookId, callback) {
+        const query = `
+  SELECT books.id, books.name, books.isbn,
+         authors.id AS author_id, authors.first_name, authors.last_name
+  FROM books
+  INNER JOIN authors ON books.author_id = authors.id
+  WHERE books.id = ?`;
+
+        db.query(query, [bookId], (err, results) => {
+            if (err) throw err;
+            if (results.length === 0) {
+                callback(null); // Book not found
+            } else {
+                callback(results[0]);
+            }
+        });
+    }
+
+
 }
 
 module.exports = Book;
