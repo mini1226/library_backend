@@ -12,6 +12,15 @@ class Book {
     }
 
 
+    static getAllPaginated(page, limit, callback) {
+        const offset = (page - 1) * limit;
+        const query = `SELECT * FROM books LIMIT ${limit} OFFSET ${offset}`;
+
+        db.query(query, (err, results) => {
+            if (err) throw err;
+            callback(results);
+        });
+    }
 
 
 }
