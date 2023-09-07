@@ -2,6 +2,8 @@
 const Author = require('../models/authorModel');
 
 class AuthorController {
+
+
     static getAllAuthors(req, res) {
         Author.getAll((authors) => {
             res.json(authors);
@@ -9,8 +11,20 @@ class AuthorController {
     }
 
 
+    static getAuthorById(req, res) {
+        const authorId = req.params.id;
 
-    // Add other controller methods as needed
+        Author.getAuthorById(authorId, (author) => {
+            if (!author) {
+                // Author not found
+                return res.status(404).json({ error: 'Author not found' });
+            }
+
+            res.json(author);
+        });
+    }
+
+
 }
 
 module.exports = AuthorController;
