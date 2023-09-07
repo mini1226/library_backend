@@ -8,6 +8,7 @@ router.get('/', BookController.getAllBooks);
 router.get('/paginated', BookController.getAllBooksPaginated);
 router.get('/:id', BookController.getBookById);
 router.post('/', BookController.createBook);
+router.put('/:id', BookController.updateBook);
 
 
 // Add other book routes as needed

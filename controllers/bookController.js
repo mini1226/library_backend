@@ -46,6 +46,17 @@ class BookController {
 
 
 
+    static updateBook(req, res) {
+        const bookId = req.params.id;
+        const bookData = req.body;
+
+        Book.updateBook(bookId, bookData, () => {
+            res.status(204).send(); // Successful update, no content to return
+        });
+    }
+
+
+
 
 
 

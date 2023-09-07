@@ -53,6 +53,17 @@ class Book {
     }
 
 
+    static updateBook(bookId, bookData, callback) {
+        const { name, isbn, author_id } = bookData;
+        const query = 'UPDATE books SET name = ?, isbn = ?, author_id = ? WHERE id = ?';
+
+        db.query(query, [name, isbn, author_id, bookId], (err) => {
+            if (err) throw err;
+            callback();
+        });
+    }
+
+
 }
 
 module.exports = Book;
