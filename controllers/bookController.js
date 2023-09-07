@@ -36,6 +36,16 @@ class BookController {
 
 
 
+    static createBook(req, res) {
+        const bookData = req.body;
+
+        Book.createBook(bookData, (bookId) => {
+            res.status(201).json({ id: bookId });
+        });
+    }
+
+
+
 
 
 

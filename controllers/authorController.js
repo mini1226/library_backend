@@ -33,6 +33,15 @@ class AuthorController {
         });
     }
 
+
+    static updateAuthor(req, res) {
+        const authorId = req.params.id;
+        const authorData = req.body;
+
+        Author.updateAuthor(authorId, authorData, () => {
+            res.status(204).send(); // Successful update, no content to return
+        });
+    }
 }
 
 module.exports = AuthorController;

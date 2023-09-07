@@ -5,10 +5,9 @@ const BookController = require('../controllers/bookController');
 
 // Define book routes
 router.get('/', BookController.getAllBooks);
-router.get('/paginated', BookController.getAllBooksPaginate);
+router.get('/paginated', BookController.getAllBooksPaginated);
 router.get('/:id', BookController.getBookById);
-
-
+router.post('/', BookController.createBook);
 
 
 // Add other book routes as needed

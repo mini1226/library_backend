@@ -42,6 +42,17 @@ class Book {
     }
 
 
+    static createBook(bookData, callback) {
+        const { name, isbn, author_id } = bookData;
+        const query = 'INSERT INTO books (name, isbn, author_id) VALUES (?, ?, ?)';
+
+        db.query(query, [name, isbn, author_id], (err, results) => {
+            if (err) throw err;
+            callback(results.insertId);
+        });
+    }
+
+
 }
 
 module.exports = Book;
