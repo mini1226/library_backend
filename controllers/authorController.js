@@ -25,6 +25,14 @@ class AuthorController {
     }
 
 
+    static createAuthor(req, res) {
+        const authorData = req.body;
+
+        Author.createAuthor(authorData, (authorId) => {
+            res.status(201).json({ id: authorId });
+        });
+    }
+
 }
 
 module.exports = AuthorController;
